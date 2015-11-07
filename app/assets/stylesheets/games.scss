@@ -1,0 +1,66 @@
+// Place all the styles related to the Games controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.page-header {
+  border-bottom: 5px solid $brand-primary;
+}
+
+.game-list-heading {
+  margin-top: 0;
+}
+
+.games-index {
+  .main-section {
+    padding-top: 1em;
+  }
+}
+
+.board {
+  tr {
+    td {
+      a {
+        width: 40px;
+        height: 40px;
+        display: block;
+        background-color: $brand-primary;
+        border: 1px solid white;
+
+        &:hover {
+          background-color: lighten($brand-primary, 10%);
+        }
+      }
+
+      span {
+        width: 40px;
+        height: 40px;
+        display: block;
+        border: 1px solid white;
+        line-height: 40px;
+        text-align: center;
+        background-color: #AAAAAA;
+        font-size: 24px;
+      }
+
+      span.checked {
+        font-weight: bold
+      }
+
+      span.bomb {
+        color: white;
+        background-color: black;
+
+        &:after {
+          font-family: 'Glyphicons Halflings';
+          content: "\e104"
+        }
+      }
+    }
+  }
+}
+
+.nav-footer {
+  margin-top: 2em;
+  border-top: 2px solid #AAAAAA;
+  padding-top: 1em;
+}
