@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108013823) do
+ActiveRecord::Schema.define(version: 20160425025635) do
 
   create_table "cells", force: :cascade do |t|
     t.integer  "location_x"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20151108013823) do
     t.boolean  "check"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "checked_at"
   end
 
   create_table "games", force: :cascade do |t|

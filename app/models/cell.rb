@@ -1,5 +1,9 @@
 class Cell < ActiveRecord::Base
+  TIME_BETWEEN_TURNS = 20.hours
+
   belongs_to :game
+
+  validate :not_within_cooldown
 
   def do_you_have_a_bomb?
     has_mine?
@@ -7,7 +11,8 @@ class Cell < ActiveRecord::Base
 
   def mark_as_checked!
     self.check = true
-    save!
+    self.checked_at = Time.now
+    save
   end
 
   def not_checked_yet
@@ -19,6 +24,19 @@ class Cell < ActiveRecord::Base
   end
 
   private
+
+  def not_within_cooldown
+    if game
+      latest_checked_at = game.latest_checked_at
+      if latest_checked_at
+        time_since_checked = Time.now - latest_checked_at
+        if time_since_checked < TIME_BETWEEN_TURNS
+          errors.add(:base, "You already had a go today")
+        end
+
+      end
+    end
+  end
 
   def neighbouring_cells
     x_range = coordinate_range(location_x)
