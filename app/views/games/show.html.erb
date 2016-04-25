@@ -1,30 +1,40 @@
-<h2>Game name goes here</h2>
+<h2><%= @game.name %></h2>
 
 <table class="board">
-  <tr>
-    <td><a href="#"></a></td>
-    <td><a href="#"></a></td>
-    <td><a href="#"></a></td>
-    <td><a href="#"></a></td>
-  </tr>
-  <tr>
-    <td><span class="checked">3</span></td>
-    <td><a href="#"></a></td>
-    <td><a href="#"></a></td>
-    <td><a href="#"></a></td>
-  </tr>
-  <tr>
-    <td><a href="#"></a></td>
-    <td><a href="#"></a></td>
-    <td><span class="bomb"></span></td>
-    <td><a href="#"></a></td>
-  </tr>
-  <tr>
-    <td><a href="#"></a></td>
-    <td><a href="#"></a></td>
-    <td><a href="#"></a></td>
-    <td><a href="#"></a></td>
-  </tr>
+  <% @game.grid_size.times do |location_y| %>
+    <tr>
+      <% @game.grid_size.times do |location_x| %>
+        <% cell = @game.cell_at(location_x, location_y) %>
+        <% if cell.check? %>
+          <% if cell.has_mine? %>
+            <td><span class="bomb"></span></td>
+          <% else %>
+            <td><span class="checked"><%= cell.neighbouring_mines_count %></span></td>
+          <% end %>
+        <% else %>
+          <td><%= link_to '', sweep_cell_path(cell), method: :post %></td>
+        <% end %>
+      <% end %>
+    </tr>
+  <% end %>
+  <!--<tr>-->
+    <!--<td><span class="checked">3</span></td>-->
+    <!--<td><a href="#"></a></td>-->
+    <!--<td><a href="#"></a></td>-->
+    <!--<td><a href="#"></a></td>-->
+  <!--</tr>-->
+  <!--<tr>-->
+    <!--<td><a href="#"></a></td>-->
+    <!--<td><a href="#"></a></td>-->
+    <!--<td><span class="bomb"></span></td>-->
+    <!--<td><a href="#"></a></td>-->
+  <!--</tr>-->
+  <!--<tr>-->
+    <!--<td><a href="#"></a></td>-->
+    <!--<td><a href="#"></a></td>-->
+    <!--<td><a href="#"></a></td>-->
+    <!--<td><a href="#"></a></td>-->
+  <!--</tr>-->
 </table>
 
 <footer class="nav-footer">
